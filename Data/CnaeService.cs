@@ -125,7 +125,7 @@ namespace CnaeCrud.Data
 
 		public async void BaixarCnaeApi(int CnaeID)
 		{
-			var subclasse = string.Concat("subclasses/", CnaeID);
+			string subclasse = string.Concat("subclasses/", CnaeID);
 
 			RestClient? client = new RestClient("https://servicodados.ibge.gov.br/api/v2/cnae/");
 			RestRequest? request = new RestRequest(subclasse);
@@ -135,7 +135,12 @@ namespace CnaeCrud.Data
 
             List<Item>? cnaes = JsonSerializer.Deserialize<List<Item>>(response.Content);
 
-			if (cnaes != null)
+            if (cnaes.Count == 0)
+            {
+                _navigationManager.NavigateTo("consultaerro");
+            }
+
+            if (cnaes != null)
 			{
 				foreach (Item item in cnaes)
 				{

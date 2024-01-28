@@ -54,10 +54,13 @@ Mostra informações iniciais da aplicação.
 
 Mostra uma listagem de todos os CNAEs presentes no banco de dados, e tem botão de edição para cada CNAE.
 
+![Tela home!](/Shared/Cnaes.png "Tela Cnaes")
 
 ### Tela Edição de CNAEs
 
 Possuí 3 inputs de dados para edição das informações do CNAE, me dois botões para edição ou exclusão do CNAE.
+
+![Tela home!](/Shared/Cnaes_Edição.png "Tela Cnaes Edição")
 
 ### Tele da busca pela API
 
@@ -65,6 +68,21 @@ Possuí 3 inputs de dados para edição das informações do CNAE, me dois botõ
 
 Possui um input para informação no CNAE pesquisado e um botão para buscar através da API.
 
+![Tela home!](/Shared/Cnaes_Inclusão_Api.png "Tela Cnaes Inclusão API")
 
+## Pontos a melhorar
 
+- [ ] Realizar consulta se CNAE já existe na base para não salvar em duplicidade.
+
+- [ ] No input de pesquisa de CNAE por ID, retirar a possibilidade de inclusão do simbolo "-".
+
+- [ ] Realizar pesquisa por Descrição na Api
+
+- [ ] Criar separações entre o Model e o Sistema
+
+- [ ] Criar testes automatizados
+
+- [ ] Criar filtro de listagem de CNAEs
+
+- [ ] Criar relatório dos dados
 

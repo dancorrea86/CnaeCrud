@@ -8,7 +8,7 @@
 <form>
     <div style="margin-bottom: 8px">
         <label for="CnaeID"></label>
-        <input type="number" id="cnaeidtext" class="form-control" @bind="_cnaeID" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+        <input type="number" id="cnaeidtext" class="form-control" @bind="_cnaeID"/>
     </div>
     <button type="button" class="btn btn-primary" @onclick=HandleSubmit>Pesquisar CNAE</button>
 </form>
@@ -21,6 +21,8 @@
     {
         if (_cnaeID != null || _cnaeID != "")
         {
+            _cnaeID = _cnaeID.Replace("-", "");
+
             var cnaeID = int.Parse(_cnaeID);
             CnaeService.BaixarCnaeApi(cnaeID);
         }
