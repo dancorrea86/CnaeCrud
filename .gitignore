@@ -1,2 +1,5 @@
 ﻿Cnae.db
 /Migrations
+/bin
+/.vs
+/obj
