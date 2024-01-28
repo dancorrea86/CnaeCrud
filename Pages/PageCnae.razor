@@ -1,0 +1,72 @@
+﻿@page "/cnae"
+@page "/cnae/{CnaeID:int}"
+@inject ICnaeService CnaeService
+
+@if (CnaeID == null)
+{
+    <h3>Criar um novo CNAE:</h3>
+}
+else
+{
+    <h3>Alterar o CNAE "@cnae.CnaeID"</h3>
+}
+
+<EditForm Model="cnae" OnSubmit="HandleSubmit">
+    <div>
+        <label for="CnaeID"></label>
+        <InputNumber id="cnaeid" @bind-Value="cnae.CnaeID" class="form-control"></InputNumber>
+    </div>
+    <div>
+        <label for="Atividade"></label>
+        <InputText id="atividade" @bind-Value="cnae.Atividade" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="Descricao"></label>
+        <InputText id="descricao" @bind-Value="cnae.Descricao" class="form-control"></InputText>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    @if (CnaeID != null)
+    {
+        <button type="button" class="btn btn-danger" @onclick="DeleteCnae">Delete Cnae</button>
+    }
+</EditForm>
+
+@code {
+    [Parameter]
+    public int? CnaeID { get; set; }
+
+    string btnText = string.Empty;
+
+    Cnae cnae = new Cnae();
+
+    protected override void OnInitialized()
+    {
+        btnText = CnaeID == null ? "Salvar CNAE" : "Atualizar CNAE";
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (CnaeID != null)
+        {
+            cnae = await CnaeService.GetCnaeUnico((int)CnaeID);
+        }
+    }
+
+    async Task HandleSubmit()
+    {
+        if(CnaeID == null)
+        {
+            await CnaeService.CreateCnae(cnae);
+        }
+        else
+        {
+            await CnaeService.UpdateCnae(cnae, (int)CnaeID);
+        }
+    }
+
+    async Task DeleteCnae()
+    {
+        await CnaeService.DeleteCnae(cnae.CnaeID);
+    }
+}

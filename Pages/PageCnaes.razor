@@ -1,0 +1,51 @@
+﻿@page "/cnaes"
+@inject ICnaeService CnaesService
+@inject NavigationManager NavigationManager
+
+<h3>Cnaes</h3>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>CnaeID</th>
+			<th>Descrição</th>
+			<th>Atividade</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var cnae in CnaesService.Cnaes)
+		{
+			<tr>
+				<td>@cnae.CnaeID</td>
+				<td>@cnae.Descricao</td>
+				<td>@cnae.Atividade</td>
+				<td>
+					<button class="btn btn-primary"
+					@onclick="() => MostrarCnae(cnae.CnaeID)">
+						<i class="oi oi-pencil"></i>
+					</button>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<button class="btn btn-primary" @onclick="CriarNovoCnae">Criar</button>
+
+@code {
+	protected override async void OnInitialized()
+	{
+		await CnaesService.CarregarCnaes();
+	}
+
+	void MostrarCnae(int id)
+	{
+		NavigationManager.NavigateTo($"cnae/{id}");
+	}
+
+	void CriarNovoCnae()
+	{
+		NavigationManager.NavigateTo($"cnae");
+	}
+
+
+}

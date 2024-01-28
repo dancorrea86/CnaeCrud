@@ -1,0 +1,28 @@
+﻿@page "/counter"
+@inject ICnaeService CnaeService
+
+<PageTitle>Counter</PageTitle>
+
+<h1>BuscarCNAE por ID</h1>
+
+<form>
+    <div style="margin-bottom: 8px">
+        <label for="CnaeID"></label>
+        <input type="number" id="cnaeidtext" class="form-control" @bind="_cnaeID" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+    </div>
+    <button type="button" class="btn btn-primary" @onclick=HandleSubmit>Pesquisar CNAE</button>
+</form>
+
+@code {
+
+    private string _cnaeID;
+
+    void HandleSubmit()
+    {
+        if (_cnaeID != null || _cnaeID != "")
+        {
+            var cnaeID = int.Parse(_cnaeID);
+            CnaeService.BaixarCnaeApi(cnaeID);
+        }
+    }
+}
